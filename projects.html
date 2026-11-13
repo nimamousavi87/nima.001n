@@ -1,0 +1,971 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08080c">
+  <meta name="description" content="پروژه‌های نرم‌افزاری NIMA.001N">
+  <title>پروژه‌ها | NIMA.001N</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap');
+
+    :root {
+      --bg: #08080c;
+      --red: #ff294d;
+      --red-light: #ff526e;
+      --text: #f5f5f8;
+      --muted: #a1a1ae;
+      --border: rgba(255,255,255,.09);
+      --glass: rgba(255,255,255,.045);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      min-width: 0;
+      overflow-x: clip;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      width: 100%;
+      min-width: 0;
+      min-height: 100vh;
+      overflow-x: clip;
+      background:
+        radial-gradient(ellipse at 80% 0%, rgba(255,30,70,.10), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'Vazirmatn', Tahoma, sans-serif;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .main-header {
+      width: min(1320px, calc(100% - 48px));
+      min-height: 78px;
+      margin: 14px auto 0;
+      padding: 0 27px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      position: sticky;
+      top: 12px;
+      z-index: 100;
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      background: rgba(15,15,22,.88);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+    }
+
+    .logo {
+      flex-shrink: 0;
+      font-family: Arial, sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      direction: ltr;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--red);
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .desktop-nav a {
+      color: #b9b9c5;
+      font-size: 13px;
+      transition: .25s;
+      white-space: nowrap;
+    }
+
+    .desktop-nav a:hover,
+    .desktop-nav a.active {
+      color: white;
+    }
+
+    .desktop-nav a.active {
+      border-bottom: 2px solid var(--red);
+      padding-bottom: 7px;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 43px;
+      height: 43px;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 6px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--glass);
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      width: 20px;
+      height: 2px;
+      border-radius: 5px;
+      background: white;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 199;
+      background: rgba(0,0,0,.72);
+      opacity: 0;
+      visibility: hidden;
+      transition: .3s;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      z-index: 200;
+      top: 0;
+      right: 0;
+      width: min(330px, 86vw);
+      height: 100vh;
+      height: 100dvh;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      background: #101018;
+      border-left: 1px solid var(--border);
+      transform: translateX(105%);
+      transition: transform .3s ease;
+    }
+
+    body.menu-open .mobile-menu {
+      transform: translateX(0);
+    }
+
+    body.menu-open .menu-overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 25px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .menu-close {
+      width: 36px;
+      height: 36px;
+      color: white;
+      font-size: 25px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--glass);
+      cursor: pointer;
+    }
+
+    .mobile-menu-caption {
+      margin: 28px 0 15px;
+      color: var(--red-light);
+      font-size: 10px;
+      letter-spacing: 2px;
+      direction: ltr;
+    }
+
+    .mobile-menu nav {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .mobile-menu nav a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      color: #c3c3ce;
+      font-size: 14px;
+    }
+
+    .mobile-menu nav a span {
+      width: 24px;
+      color: var(--red-light);
+      text-align: center;
+    }
+
+    .mobile-menu nav a.active {
+      color: white;
+      background: rgba(255,41,77,.09);
+      border-color: rgba(255,41,77,.2);
+    }
+
+    .mobile-menu-footer {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-family: Arial, sans-serif;
+      font-weight: 900;
+      direction: ltr;
+    }
+
+    .mobile-menu-footer span {
+      display: block;
+      margin-top: 7px;
+      color: #777785;
+      font-size: 9px;
+      font-weight: 400;
+    }
+
+    .projects-page {
+      width: min(1180px, calc(100% - 48px));
+      min-width: 0;
+      margin: 0 auto;
+      padding: 100px 0 110px;
+    }
+
+    .projects-heading {
+      max-width: 760px;
+      margin: 0 auto 65px;
+      text-align: center;
+    }
+
+    .section-index {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--red-light);
+      font-size: 12px;
+      letter-spacing: 3px;
+      direction: ltr;
+    }
+
+    .projects-heading h1 {
+      font-size: clamp(30px, 5vw, 48px);
+      font-weight: 900;
+      line-height: 1.7;
+    }
+
+    .projects-heading p {
+      margin-top: 15px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 2.5;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 25px;
+      align-items: stretch;
+    }
+
+    .project-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.055),
+        rgba(255,255,255,.012)
+      );
+      transition: .3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,41,77,.4);
+      box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    }
+
+    .project-top {
+      min-height: 65px;
+      padding: 20px 23px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+      color: #c8c8d1;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      direction: ltr;
+    }
+
+    .project-number {
+      color: var(--red-light);
+      letter-spacing: 2px;
+    }
+
+    .project-preview {
+      min-height: 255px;
+      padding: 25px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at center, rgba(255,30,70,.17), transparent 65%),
+        #0d0b12;
+    }
+
+    .preview-orbit {
+      width: min(250px, 75%);
+      aspect-ratio: 1;
+      position: absolute;
+      border: 1px solid rgba(255,70,100,.35);
+      border-radius: 50%;
+      box-shadow: 0 0 45px rgba(255,30,70,.12);
+    }
+
+    .preview-orbit::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+    }
+
+    .preview-name {
+      position: relative;
+      z-index: 1;
+      font-family: Arial, sans-serif;
+      font-size: clamp(25px, 4vw, 38px);
+      font-weight: 900;
+      direction: ltr;
+      overflow-wrap: anywhere;
+      text-align: center;
+    }
+
+    .preview-name span {
+      color: var(--red);
+    }
+
+    .project-preview img {
+      width: 100%;
+      height: 100%;
+      max-height: 255px;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+
+    .project-preview.has-image {
+      padding: 0;
+    }
+
+    .project-preview.has-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.25));
+      pointer-events: none;
+    }
+
+    .project-info {
+      min-width: 0;
+      padding: 25px;
+    }
+
+    .project-category {
+      color: var(--red-light);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      direction: ltr;
+      text-align: right;
+    }
+
+    .project-info h2 {
+      margin-top: 12px;
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .project-info p {
+      margin-top: 12px;
+      color: #aaaab7;
+      font-size: 14px;
+      line-height: 2.5;
+      overflow-wrap: anywhere;
+    }
+
+    .project-tech {
+      margin-top: 18px;
+      color: #858592;
+      font-size: 11px;
+      line-height: 2;
+      direction: ltr;
+    }
+
+    .project-link {
+      min-height: 46px;
+      margin-top: 22px;
+      padding: 12px 19px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid rgba(255,41,77,.4);
+      border-radius: 12px;
+      background: rgba(255,41,77,.09);
+      color: white;
+      font-size: 13px;
+      transition: .25s;
+    }
+
+    .project-link:hover {
+      background: rgba(255,41,77,.2);
+      border-color: var(--red);
+    }
+
+    .future-project {
+      min-width: 0;
+      min-height: 270px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border: 1px dashed rgba(255,255,255,.17);
+      border-radius: 25px;
+      background: rgba(255,255,255,.018);
+    }
+
+    .future-icon {
+      width: 75px;
+      height: 75px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255,41,77,.3);
+      border-radius: 22px;
+      background: rgba(255,41,77,.07);
+      color: var(--red-light);
+      font-size: 34px;
+    }
+
+    .future-project h2 {
+      font-size: 20px;
+      line-height: 2;
+    }
+
+    .future-project p {
+      max-width: 320px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 2.4;
+    }
+
+    .future-status {
+      margin-top: 22px;
+      color: var(--red-light);
+      font-size: 10px;
+      letter-spacing: 2px;
+      direction: ltr;
+    }
+
+    .loading-message,
+    .error-message {
+      grid-column: 1 / -1;
+      padding: 30px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      line-height: 2;
+    }
+
+    .error-message {
+      color: #ff8294;
+    }
+
+    .main-footer {
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,.015);
+    }
+
+    .footer-inner {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 40px 0 20px;
+    }
+
+    .footer-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-main p {
+      color: #777785;
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 1px;
+      direction: ltr;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      padding: 28px 0;
+    }
+
+    .footer-links a {
+      color: #9999a8;
+      font-size: 12px;
+    }
+
+    .footer-bottom {
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      color: #777785;
+      font-size: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .desktop-nav {
+        gap: 15px;
+      }
+
+      .desktop-nav a {
+        font-size: 11px;
+      }
+
+      .projects-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .main-header {
+        width: calc(100% - 28px);
+        min-height: 67px;
+        padding: 0 17px;
+        top: 8px;
+        margin-top: 9px;
+      }
+
+      .desktop-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .logo {
+        font-size: 20px;
+      }
+
+      .projects-page {
+        width: calc(100% - 34px);
+        padding-top: 75px;
+        padding-bottom: 75px;
+      }
+
+      .projects-heading {
+        margin-bottom: 40px;
+      }
+
+      .projects-heading h1 {
+        font-size: 32px;
+      }
+
+      .projects-heading p {
+        font-size: 13px;
+      }
+
+      .projects-grid {
+        gap: 20px;
+      }
+
+      .project-preview {
+        min-height: 220px;
+      }
+
+      .project-info {
+        padding: 21px;
+      }
+
+      .project-info h2 {
+        font-size: 23px;
+      }
+
+      .footer-inner {
+        width: calc(100% - 34px);
+      }
+
+      .footer-main {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-links {
+        gap: 15px 20px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .projects-heading h1 {
+        font-size: 27px;
+      }
+
+      .project-top {
+        padding: 16px;
+      }
+
+      .project-preview {
+        min-height: 190px;
+      }
+
+      .project-info {
+        padding: 18px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="main-header">
+    <a href="index.html" class="logo">
+      NIMA<span>.001N</span>
+    </a>
+
+    <nav class="desktop-nav">
+      <a href="index.html">خانه</a>
+      <a href="blog.html">آموزش‌ها</a>
+      <a href="projects.html" class="active">پروژه‌ها</a>
+      <a href="vpn.html">خرید VPN</a>
+      <a href="contact.html">ارتباط با من</a>
+    </nav>
+
+    <button class="menu-toggle" id="menuToggle"
+      aria-label="باز کردن منو" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <aside class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-top">
+      <a href="index.html" class="logo">
+        NIMA<span>.001N</span>
+      </a>
+
+      <button class="menu-close" id="menuClose"
+        aria-label="بستن منو">×</button>
+    </div>
+
+    <div class="mobile-menu-caption">MAIN MENU</div>
+
+    <nav>
+      <a href="index.html"><span>⌂</span>خانه</a>
+      <a href="blog.html"><span>▤</span>آموزش‌ها</a>
+      <a href="projects.html" class="active"><span>◇</span>پروژه‌ها</a>
+      <a href="vpn.html"><span>⌘</span>خرید VPN</a>
+      <a href="contact.html"><span>✉</span>ارتباط با من</a>
+    </nav>
+
+    <div class="mobile-menu-footer">
+      NIMA.001N
+      <span>TECH • DIGITAL • LEARNING</span>
+    </div>
+  </aside>
+
+  <main class="projects-page">
+
+    <section class="projects-heading">
+      <span class="section-index">02 / PROJECTS</span>
+      <h1>پروژه‌های نرم‌افزاری</h1>
+      <p>
+        مجموعه‌ای از پروژه‌های نرم‌افزاری که با هدف ساخت
+        ابزارهای کاربردی طراحی و توسعه داده شده‌اند.
+      </p>
+    </section>
+
+    <section class="projects-grid" id="projectsGrid">
+      <div class="loading-message">
+        در حال دریافت پروژه‌ها...
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-inner">
+
+      <div class="footer-main">
+        <a href="index.html" class="logo">
+          NIMA<span>.001N</span>
+        </a>
+        <p>TECH • DIGITAL • LEARNING</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">خانه</a>
+        <a href="blog.html">آموزش‌ها</a>
+        <a href="projects.html">پروژه‌ها</a>
+        <a href="vpn.html">VPN</a>
+        <a href="contact.html">ارتباط</a>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© NIMA.001N</span>
+        <span>تمام حقوق محفوظ است.</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const menuClose = document.getElementById("menuClose");
+    const menuOverlay = document.getElementById("menuOverlay");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    function openMenu() {
+      document.body.classList.add("menu-open");
+      menuToggle.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu() {
+      document.body.classList.remove("menu-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
+
+    menuToggle.addEventListener("click", openMenu);
+    menuClose.addEventListener("click", closeMenu);
+    menuOverlay.addEventListener("click", closeMenu);
+
+    mobileMenu.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeMenu();
+    });
+  </script>
+
+  <script type="module">
+    import { supabase } from "./admin/supabase.js";
+
+    const grid = document.getElementById("projectsGrid");
+
+    function safeUrl(value) {
+      try {
+        const url = new URL(value);
+        return ["http:", "https:"].includes(url.protocol)
+          ? url.href
+          : "";
+      } catch {
+        return "";
+      }
+    }
+
+    function createElement(tag, className, text) {
+      const element = document.createElement(tag);
+
+      if (className) element.className = className;
+      if (text !== undefined) element.textContent = text;
+
+      return element;
+    }
+
+    function createProjectCard(project, index) {
+      const card = createElement("article", "project-card");
+
+      const top = createElement("div", "project-top");
+
+      top.append(
+        createElement(
+          "span",
+          "project-number",
+          `PROJECT ${String(index + 1).padStart(2, "0")}`
+        ),
+        createElement("span", "", "NIMA.001N PROJECT")
+      );
+
+      const preview = createElement("div", "project-preview");
+      const imageUrl = safeUrl(project.image_url || "");
+
+      if (imageUrl) {
+        preview.classList.add("has-image");
+
+        const image = createElement("img");
+        image.src = imageUrl;
+        image.alt = project.title || "تصویر پروژه";
+        image.loading = "lazy";
+
+        preview.appendChild(image);
+      } else {
+        const orbit = createElement("div", "preview-orbit");
+        const name = createElement("div", "preview-name");
+
+        name.textContent = project.title || "PROJECT";
+
+        preview.append(orbit, name);
+      }
+
+      const info = createElement("div", "project-info");
+
+      info.appendChild(createElement(
+        "span",
+        "project-category",
+        project.category || "GENERAL PROJECT"
+      ));
+
+      info.appendChild(createElement(
+        "h2",
+        "",
+        project.title || "بدون عنوان"
+      ));
+
+      info.appendChild(createElement(
+        "p",
+        "",
+        project.description || "توضیحاتی برای این پروژه ثبت نشده است."
+      ));
+
+      info.appendChild(createElement(
+        "div",
+        "project-tech",
+        project.is_featured
+          ? "FEATURED PROJECT"
+          : "NIMA.001N PROJECT"
+      ));
+
+      const projectUrl = safeUrl(project.project_url || "");
+
+      if (projectUrl) {
+        const link = createElement("a", "project-link");
+
+        link.href = projectUrl;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+
+        link.append(
+          document.createTextNode("مشاهده پروژه "),
+          createElement("span", "", "←")
+        );
+
+        info.appendChild(link);
+      }
+
+      card.append(top, preview, info);
+
+      return card;
+    }
+
+    function createFutureCard() {
+      const card = createElement("article", "future-project");
+
+      card.append(
+        createElement("div", "future-icon", "＋"),
+        createElement("h2", "", "پروژه‌های دیگر به‌زودی"),
+        createElement(
+          "p",
+          "",
+          "پروژه‌های نرم‌افزاری جدید در حال طراحی و توسعه هستند. پس از آماده شدن، در همین بخش معرفی خواهند شد."
+        ),
+        createElement(
+          "span",
+          "future-status",
+          "MORE PROJECTS COMING SOON"
+        )
+      );
+
+      return card;
+    }
+
+    async function loadProjects() {
+      try {
+        const { data, error } = await supabase
+          .from("projects")
+          .select(
+            "id, title, slug, description, category, project_url, image_url, is_featured, sort_order, created_at"
+          )
+          .eq("is_published", true)
+          .order("sort_order", { ascending: true })
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        grid.replaceChildren();
+
+        (data || []).forEach((project, index) => {
+          grid.appendChild(createProjectCard(project, index));
+        });
+
+        if (!data || data.length === 0) {
+          grid.appendChild(createElement(
+            "div",
+            "loading-message",
+            "هنوز پروژه منتشرشده‌ای وجود ندارد."
+          ));
+        }
+
+        grid.appendChild(createFutureCard());
+
+      } catch (error) {
+        console.error("Projects loading error:", error);
+
+        grid.replaceChildren(
+          createElement(
+            "div",
+            "error-message",
+            "دریافت پروژه‌ها با مشکل مواجه شد. لطفاً اتصال سایت و تنظیمات Supabase را بررسی کنید."
+          ),
+          createFutureCard()
+        );
+      }
+    }
+
+    loadProjects();
+  </script>
+
+</body>
+</html>
