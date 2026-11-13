@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>مدیریت سایت | NIMA.001N</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Estedad:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="grid-bg"></div>
+
+  <main class="page-wrapper">
+
+    <!-- LOGIN -->
+    <section class="login-card" id="loginSection">
+
+      <div class="brand">
+        <div class="brand-icon">N</div>
+
+        <div>
+          <h1>NIMA<span>.001N</span></h1>
+          <p>ADMIN CONTROL CENTER</p>
+        </div>
+      </div>
+
+      <div class="login-heading">
+        <span class="eyebrow">PRIVATE ACCESS</span>
+        <h2>ورود به پنل مدیریت</h2>
+        <p>برای ادامه، اطلاعات حساب مدیر را وارد کن.</p>
+      </div>
+
+      <form id="loginForm">
+
+        <label for="email">ایمیل مدیر</label>
+
+        <div class="input-wrap">
+          <span>✉</span>
+          <input
+            id="email"
+            type="email"
+            placeholder="admin@example.com"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <label for="password">رمز عبور</label>
+
+        <div class="input-wrap">
+          <span>●</span>
+
+          <input
+            id="password"
+            type="password"
+            placeholder="رمز عبور حساب"
+            autocomplete="current-password"
+            required
+          >
+
+          <button
+            type="button"
+            class="show-password"
+            id="togglePassword"
+            aria-label="نمایش رمز عبور"
+          >◉</button>
+        </div>
+
+        <button
+          class="primary-button"
+          type="submit"
+          id="loginButton"
+        >
+          <span>ورود به پنل</span>
+          <span>←</span>
+        </button>
+
+        <p class="message" id="loginMessage" role="status"></p>
+
+      </form>
+
+      <div class="login-footer">
+        <span class="status-dot"></span>
+        SECURE ADMIN AREA
+      </div>
+
+    </section>
+
+    <!-- DASHBOARD -->
+    <section class="dashboard hidden" id="dashboardSection">
+
+      <header class="dashboard-header">
+
+        <div class="brand compact">
+          <div class="brand-icon">N</div>
+
+          <div>
+            <h1>NIMA<span>.001N</span></h1>
+            <p>ADMIN DASHBOARD</p>
+          </div>
+        </div>
+
+        <button class="logout-button" id="logoutButton">
+          خروج از حساب ↗
+        </button>
+
+      </header>
+
+      <!-- WELCOME -->
+      <div class="welcome">
+        <span class="eyebrow">CONTROL CENTER / 001</span>
+        <h2>خوش اومدی مدیر 👋</h2>
+        <p>از این قسمت می‌تونی بخش‌های مختلف سایت رو مدیریت کنی.</p>
+      </div>
+
+      <div class="dashboard-status">
+        <span class="status-dot"></span>
+        پنل وارد حساب شده است
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-grid">
+
+        <article class="stat-card">
+          <span class="stat-icon">◈</span>
+          <p>وضعیت پنل</p>
+          <h3>فعال</h3>
+          <small>ADMIN PANEL</small>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon">⌘</span>
+          <p>مدیریت محتوا</p>
+          <h3>آماده</h3>
+          <small>CONTENT CONTROL</small>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon">⌁</span>
+          <p>اتصال دیتابیس</p>
+          <h3 id="databaseStatus">در حال بررسی</h3>
+          <small>SUPABASE</small>
+        </article>
+
+      </div>
+
+      <!-- MODULES -->
+      <h3 class="section-title">مدیریت بخش‌های سایت</h3>
+
+      <div class="modules-grid">
+
+        <!-- PROJECT MANAGEMENT -->
+        <a href="projects.html" class="module-card project-module">
+
+          <div class="module-icon">▣</div>
+
+          <h3>مدیریت پروژه‌ها</h3>
+
+          <p>
+            افزودن، ویرایش، حذف و انتشار پروژه‌ها
+          </p>
+
+          <span>ورود به مدیریت ←</span>
+
+        </a>
+
+        <!-- BLOG MANAGEMENT -->
+        <a href="blog.html" class="module-card blog-module">
+
+          <div class="module-icon">▤</div>
+
+          <h3>مدیریت آموزش‌ها</h3>
+
+          <p>
+            افزودن مقالات، ویرایش مطالب و مدیریت محتوای آموزشی
+          </p>
+
+          <span>ورود به مدیریت ←</span>
+
+        </a>
+
+        <!-- VPN -->
+        <article class="module-card">
+          <div class="module-icon">◇</div>
+          <h3>مدیریت VPN</h3>
+          <p>ویرایش پلن‌ها و اطلاعات خرید</p>
+          <span>به‌زودی</span>
+        </article>
+
+        <!-- BANNERS -->
+        <article class="module-card">
+          <div class="module-icon">▧</div>
+          <h3>بنرها و تصاویر</h3>
+          <p>مدیریت تصاویر و بنرهای سایت</p>
+          <span>به‌زودی</span>
+        </article>
+
+        <!-- SETTINGS -->
+        <article class="module-card">
+          <div class="module-icon">⚙</div>
+          <h3>تنظیمات سایت</h3>
+          <p>اطلاعات تماس، فوتر و تنظیمات عمومی</p>
+          <span>به‌زودی</span>
+        </article>
+
+        <!-- MAINTENANCE -->
+        <article class="module-card">
+          <div class="module-icon">⌁</div>
+          <h3>وضعیت سایت</h3>
+          <p>مدیریت حالت تعمیر و نگهداری</p>
+          <span>به‌زودی</span>
+        </article>
+
+      </div>
+
+      <footer class="dashboard-footer">
+        NIMA.001N © ALL RIGHTS RESERVED
+      </footer>
+
+    </section>
+
+  </main>
+
+  <!-- MODULE CARD STYLES -->
+  <style>
+    a.module-card {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    a.project-module,
+    a.blog-module {
+      transition: .3s ease;
+    }
+
+    a.project-module:hover,
+    a.blog-module:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 41, 77, .45);
+    }
+
+    a.project-module span,
+    a.blog-module span {
+      color: #ff526e;
+    }
+  </style>
+
+  <!-- EXISTING ADMIN SCRIPT -->
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>

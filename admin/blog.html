@@ -1,0 +1,797 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090909">
+  <title>مدیریت مقالات | NIMA.001N</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: #090909;
+      color: #f5f5f5;
+      min-height: 100vh;
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    .topbar {
+      padding: 20px 5%;
+      background: #111;
+      border-bottom: 1px solid #252525;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .brand span {
+      color: #ff3030;
+    }
+
+    .back {
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid #383838;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+
+    .back:hover {
+      border-color: #ff3030;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 1150px;
+      margin: 35px auto;
+    }
+
+    .heading {
+      margin-bottom: 25px;
+    }
+
+    .heading h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .heading p {
+      color: #888;
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat {
+      background: #121212;
+      border: 1px solid #282828;
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .stat small {
+      color: #888;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 27px;
+      margin-top: 12px;
+      color: #ff3434;
+    }
+
+    .panel {
+      background: #111;
+      border: 1px solid #292929;
+      border-radius: 17px;
+      padding: 22px;
+      margin-bottom: 25px;
+    }
+
+    .panel h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 13px;
+      color: #bbb;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      background: #090909;
+      border: 1px solid #333;
+      color: white;
+      border-radius: 10px;
+      padding: 13px;
+      outline: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: #ff3434;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 2;
+    }
+
+    #content {
+      min-height: 260px;
+    }
+
+    .checks {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    .check input {
+      width: auto;
+      accent-color: #ff3434;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      border: 0;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .primary {
+      background: #ff3030;
+      color: white;
+    }
+
+    .primary:hover {
+      background: #d91e1e;
+    }
+
+    .secondary {
+      background: #292929;
+      color: white;
+    }
+
+    .danger {
+      background: #351515;
+      color: #ff7777;
+    }
+
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .toolbar input {
+      max-width: 350px;
+    }
+
+    .posts {
+      display: grid;
+      gap: 13px;
+    }
+
+    .post {
+      background: #0b0b0b;
+      border: 1px solid #292929;
+      border-radius: 13px;
+      padding: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .post-info {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .post-info h3 {
+      font-size: 15px;
+      margin-bottom: 9px;
+    }
+
+    .post-info p {
+      color: #888;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .status {
+      display: inline-block;
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 20px;
+      margin-top: 9px;
+    }
+
+    .published {
+      background: #12321e;
+      color: #73e99a;
+    }
+
+    .draft {
+      background: #332716;
+      color: #ffc56b;
+    }
+
+    .post-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .post-actions button {
+      padding: 9px 12px;
+      font-size: 12px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #888;
+      padding: 35px 10px;
+      border: 1px dashed #333;
+      border-radius: 12px;
+      line-height: 2;
+    }
+
+    .message {
+      display: none;
+      padding: 13px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .message.error {
+      display: block;
+      background: #351515;
+      color: #ff9999;
+    }
+
+    .message.success {
+      display: block;
+      background: #12321e;
+      color: #8df0ad;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media(max-width: 650px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .heading h1 {
+        font-size: 22px;
+      }
+
+      .post-actions {
+        width: 100%;
+      }
+
+      .post-actions button {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="brand">NIMA<span>.001N</span></div>
+    <a href="index.html" class="back">← بازگشت به پنل مدیریت</a>
+  </header>
+
+  <main class="container">
+
+    <div class="heading">
+      <h1>مدیریت مقالات</h1>
+      <p>مقالات آموزشی سایت را ایجاد، ویرایش و منتشر کن.</p>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <section class="stats">
+      <div class="stat">
+        <small>کل مقالات</small>
+        <strong id="totalCount">۰</strong>
+      </div>
+
+      <div class="stat">
+        <small>منتشر شده</small>
+        <strong id="publishedCount">۰</strong>
+      </div>
+
+      <div class="stat">
+        <small>پیش‌نویس</small>
+        <strong id="draftCount">۰</strong>
+      </div>
+    </section>
+
+    <section class="panel" id="editorPanel">
+      <h2 id="formTitle">✦ افزودن مقاله جدید</h2>
+
+      <form id="postForm">
+
+        <div class="form-grid">
+
+          <div class="field full">
+            <label for="title">عنوان مقاله *</label>
+            <input id="title" required maxlength="180"
+              placeholder="مثلاً آموزش افزایش امنیت گوشی اندروید">
+          </div>
+
+          <div class="field">
+            <label for="slug">آدرس مقاله (Slug) *</label>
+            <input id="slug" required maxlength="180"
+              placeholder="android-security-guide">
+          </div>
+
+          <div class="field">
+            <label for="category">دسته‌بندی</label>
+            <select id="category">
+              <option value="اندروید">اندروید</option>
+              <option value="هوش مصنوعی">هوش مصنوعی</option>
+              <option value="کامپیوتر">کامپیوتر</option>
+              <option value="VPN">VPN</option>
+              <option value="آموزش عمومی">آموزش عمومی</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="summary">خلاصه مقاله</label>
+            <textarea id="summary"
+              placeholder="یک توضیح کوتاه درباره محتوای مقاله..."></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="content">متن کامل مقاله</label>
+            <textarea id="content"
+              placeholder="متن مقاله را اینجا بنویس..."></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="imageUrl">آدرس تصویر مقاله</label>
+            <input id="imageUrl" type="url"
+              placeholder="https://example.com/image.jpg">
+          </div>
+
+          <div class="field">
+            <label for="sortOrder">ترتیب نمایش</label>
+            <input id="sortOrder" type="number" value="0">
+          </div>
+
+        </div>
+
+        <div class="checks">
+          <label class="check">
+            <input type="checkbox" id="isPublished">
+            انتشار مقاله
+          </label>
+
+          <label class="check">
+            <input type="checkbox" id="isFeatured">
+            مقاله ویژه
+          </label>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn primary" id="saveBtn">
+            ذخیره مقاله
+          </button>
+
+          <button type="button" class="btn secondary hidden"
+            id="cancelBtn">
+            لغو ویرایش
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="toolbar">
+        <h2>▣ فهرست مقالات</h2>
+        <input id="searchInput" placeholder="جستجوی مقاله...">
+      </div>
+
+      <div id="postsList" class="posts">
+        <div class="empty">در حال دریافت مقالات...</div>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module">
+    import { supabase } from "./supabase.js";
+
+    const $ = id => document.getElementById(id);
+
+    const form = $("postForm");
+    const postsList = $("postsList");
+    const message = $("message");
+    const saveBtn = $("saveBtn");
+
+    let posts = [];
+    let editingId = null;
+
+    function showMessage(text, type = "success") {
+      message.textContent = text;
+      message.className = "message " + type;
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      setTimeout(() => {
+        message.className = "message";
+      }, 4500);
+    }
+
+    function escapeHTML(value = "") {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[char]);
+    }
+
+    function updateStats() {
+      $("totalCount").textContent = posts.length;
+      $("publishedCount").textContent =
+        posts.filter(p => p.is_published).length;
+      $("draftCount").textContent =
+        posts.filter(p => !p.is_published).length;
+    }
+
+    async function checkAdmin() {
+      const { data: { session }, error } =
+        await supabase.auth.getSession();
+
+      if (error || !session) {
+        location.href = "index.html";
+        return false;
+      }
+
+      const { data, error: adminError } = await supabase
+        .from("admin_users")
+        .select("user_id")
+        .eq("user_id", session.user.id)
+        .maybeSingle();
+
+      if (adminError || !data) {
+        alert("دسترسی مدیریت برای این حساب تأیید نشد.");
+        location.href = "index.html";
+        return false;
+      }
+
+      return true;
+    }
+
+    async function loadPosts() {
+      postsList.innerHTML =
+        '<div class="empty">در حال دریافت مقالات...</div>';
+
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .select("*")
+        .order("sort_order", { ascending: true })
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        postsList.innerHTML =
+          '<div class="empty">خطا در دریافت مقالات: ' +
+          escapeHTML(error.message) + '</div>';
+        showMessage("دریافت مقالات ناموفق بود.", "error");
+        return;
+      }
+
+      posts = data || [];
+      updateStats();
+      renderPosts();
+    }
+
+    function renderPosts() {
+      const search = $("searchInput").value.trim().toLowerCase();
+
+      const filtered = posts.filter(post =>
+        (post.title || "").toLowerCase().includes(search) ||
+        (post.category || "").toLowerCase().includes(search) ||
+        (post.slug || "").toLowerCase().includes(search)
+      );
+
+      if (!filtered.length) {
+        postsList.innerHTML =
+          '<div class="empty">مقاله‌ای پیدا نشد.</div>';
+        return;
+      }
+
+      postsList.innerHTML = filtered.map(post => `
+        <article class="post">
+          <div class="post-info">
+            <h3>${escapeHTML(post.title)}</h3>
+            <p>
+              ${escapeHTML(post.category || "عمومی")}
+              · ${escapeHTML(post.slug)}
+            </p>
+            <span class="status ${
+              post.is_published ? "published" : "draft"
+            }">
+              ${post.is_published ? "منتشر شده" : "پیش‌نویس"}
+            </span>
+            ${post.is_featured ? '<span class="status published">ویژه</span>' : ""}
+          </div>
+
+          <div class="post-actions">
+            <button class="btn secondary"
+              data-action="edit" data-id="${post.id}">
+              ویرایش
+            </button>
+
+            <button class="btn secondary"
+              data-action="toggle" data-id="${post.id}">
+              ${post.is_published ? "لغو انتشار" : "انتشار"}
+            </button>
+
+            <button class="btn danger"
+              data-action="delete" data-id="${post.id}">
+              حذف
+            </button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function resetForm() {
+      form.reset();
+      editingId = null;
+
+      $("sortOrder").value = 0;
+      $("formTitle").textContent = "✦ افزودن مقاله جدید";
+      saveBtn.textContent = "ذخیره مقاله";
+      $("cancelBtn").classList.add("hidden");
+    }
+
+    function editPost(id) {
+      const post = posts.find(p => p.id === id);
+      if (!post) return;
+
+      editingId = id;
+
+      $("title").value = post.title || "";
+      $("slug").value = post.slug || "";
+      $("summary").value = post.summary || "";
+      $("content").value = post.content || "";
+      $("category").value = post.category || "عمومی";
+      $("imageUrl").value = post.image_url || "";
+      $("sortOrder").value = post.sort_order ?? 0;
+      $("isPublished").checked = !!post.is_published;
+      $("isFeatured").checked = !!post.is_featured;
+
+      $("formTitle").textContent = "✎ ویرایش مقاله";
+      saveBtn.textContent = "ذخیره تغییرات";
+      $("cancelBtn").classList.remove("hidden");
+
+      $("editorPanel").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      const title = $("title").value.trim();
+      const slug = $("slug").value.trim();
+
+      if (!title || !slug) {
+        showMessage("عنوان و آدرس مقاله الزامی هستند.", "error");
+        return;
+      }
+
+      const payload = {
+        title,
+        slug,
+        summary: $("summary").value.trim(),
+        content: $("content").value.trim(),
+        category: $("category").value,
+        image_url: $("imageUrl").value.trim(),
+        sort_order: Number($("sortOrder").value) || 0,
+        is_published: $("isPublished").checked,
+        is_featured: $("isFeatured").checked,
+        updated_at: new Date().toISOString()
+      };
+
+      saveBtn.disabled = true;
+      saveBtn.textContent = "در حال ذخیره...";
+
+      let result;
+
+      if (editingId) {
+        result = await supabase
+          .from("blog_posts")
+          .update(payload)
+          .eq("id", editingId);
+      } else {
+        result = await supabase
+          .from("blog_posts")
+          .insert(payload);
+      }
+
+      saveBtn.disabled = false;
+      saveBtn.textContent = editingId
+        ? "ذخیره تغییرات"
+        : "ذخیره مقاله";
+
+      if (result.error) {
+        showMessage(
+          "خطا در ذخیره: " + result.error.message,
+          "error"
+        );
+        return;
+      }
+
+      showMessage(
+        editingId
+          ? "مقاله با موفقیت ویرایش شد."
+          : "مقاله جدید با موفقیت ثبت شد."
+      );
+
+      resetForm();
+      await loadPosts();
+    });
+
+    postsList.addEventListener("click", async event => {
+      const button = event.target.closest("button[data-action]");
+      if (!button) return;
+
+      const id = button.dataset.id;
+      const action = button.dataset.action;
+      const post = posts.find(p => p.id === id);
+
+      if (!post) return;
+
+      if (action === "edit") {
+        editPost(id);
+        return;
+      }
+
+      if (action === "delete") {
+        if (!confirm(`مقاله «${post.title}» حذف شود؟`)) return;
+
+        const { error } = await supabase
+          .from("blog_posts")
+          .delete()
+          .eq("id", id);
+
+        if (error) {
+          showMessage("حذف مقاله ناموفق بود: " + error.message, "error");
+          return;
+        }
+
+        if (editingId === id) resetForm();
+
+        showMessage("مقاله حذف شد.");
+        await loadPosts();
+      }
+
+      if (action === "toggle") {
+        const { error } = await supabase
+          .from("blog_posts")
+          .update({
+            is_published: !post.is_published,
+            updated_at: new Date().toISOString()
+          })
+          .eq("id", id);
+
+        if (error) {
+          showMessage("تغییر وضعیت ناموفق بود: " + error.message, "error");
+          return;
+        }
+
+        showMessage(
+          post.is_published
+            ? "مقاله از انتشار خارج شد."
+            : "مقاله منتشر شد."
+        );
+
+        await loadPosts();
+      }
+    });
+
+    $("cancelBtn").addEventListener("click", resetForm);
+    $("searchInput").addEventListener("input", renderPosts);
+
+    const allowed = await checkAdmin();
+
+    if (allowed) {
+      await loadPosts();
+    }
+  </script>
+
+</body>
+</html>
