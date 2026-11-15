@@ -215,13 +215,20 @@
           <span>به‌زودی</span>
         </article>
 
-        <!-- MAINTENANCE -->
-        <article class="module-card">
+        <!-- SITE STATUS MANAGEMENT -->
+        <a href="status.html" class="module-card">
+
           <div class="module-icon">⌁</div>
+
           <h3>وضعیت سایت</h3>
-          <p>مدیریت حالت تعمیر و نگهداری</p>
-          <span>به‌زودی</span>
-        </article>
+
+          <p>
+            مدیریت حالت تعمیر، به‌روزرسانی و اطلاع‌رسانی
+          </p>
+
+          <span>ورود به مدیریت ←</span>
+
+        </a>
 
       </div>
 
@@ -242,19 +249,16 @@
       cursor: pointer;
     }
 
-    a.project-module,
-    a.blog-module {
+    a.module-card {
       transition: .3s ease;
     }
 
-    a.project-module:hover,
-    a.blog-module:hover {
+    a.module-card:hover {
       transform: translateY(-5px);
       border-color: rgba(255, 41, 77, .45);
     }
 
-    a.project-module span,
-    a.blog-module span {
+    a.module-card span {
       color: #ff526e;
     }
   </style>
