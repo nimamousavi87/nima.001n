@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>مدیریت وضعیت سایت | NIMA.001N</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Estedad:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .status-page{max-width:850px;margin:35px auto;padding:24px}
+    .status-box{padding:25px;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(255,255,255,.035);margin-top:20px}
+    .status-page h2{margin-bottom:12px}
+    .status-page label{display:block;margin:18px 0 8px}
+    .status-page select,.status-page input,.status-page textarea{width:100%;padding:13px;border-radius:10px;border:1px solid #444;background:#151515;color:white;font:inherit}
+    .status-page textarea{min-height:130px;resize:vertical}
+    .status-page button{border:0;border-radius:10px;padding:13px 22px;background:#ff3155;color:white;font:inherit;cursor:pointer;margin-top:18px}
+    .status-page button:disabled{opacity:.5}
+    .status-page .back{display:inline-block;color:#ff526e;text-decoration:none;margin-bottom:20px}
+    #result{margin-top:15px;line-height:2}
+    .current-status{color:#ff526e;font-weight:700}
+  </style>
+</head>
+<body>
+  <main class="status-page">
+    <a class="back" href="index.html">← بازگشت به داشبورد</a>
+
+    <h2>مدیریت وضعیت سایت</h2>
+    <p>کنترل حالت نمایش سایت و پیام‌های کاربران</p>
+
+    <section class="status-box">
+      <p>وضعیت فعلی: <span class="current-status" id="currentStatus">در حال دریافت...</span></p>
+
+      <form id="statusForm">
+        <label for="status">حالت سایت</label>
+        <select id="status">
+          <option value="active">فعال - نمایش عادی سایت</option>
+          <option value="maintenance">تعمیر و به‌روزرسانی</option>
+          <option value="notice">نمایش اطلاعیه بدون بستن سایت</option>
+        </select>
+
+        <label for="title">عنوان پیام</label>
+        <input id="title" maxlength="100" required>
+
+        <label for="message">متن پیام</label>
+        <textarea id="message" maxlength="1000" required></textarea>
+
+        <button type="submit" id="saveButton">ذخیره تنظیمات</button>
+        <p id="result" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="status.js"></script>
+</body>
+</html>
