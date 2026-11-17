@@ -1,1 +1,30 @@
 
+
+{
+  "id": "/nima.001n/",
+  "name": "NIMA.001N",
+  "short_name": "NIMA.001N",
+  "description": "NIMA.001N | TECH • AI • ANDROID • VPN",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "/nima.001n/",
+  "scope": "/nima.001n/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#08080c",
+  "theme_color": "#08080c",
+  "icons": [
+    {
+      "src": "/nima.001n/assets/nima-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/nima.001n/assets/nima-icon-512(1).png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
